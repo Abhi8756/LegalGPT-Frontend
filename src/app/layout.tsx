@@ -27,7 +27,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className="__variable_4d318d __variable_ea5f4b antialiased"
+        cz-shortcut-listen="true"
       >
         <Navbar />
         {children}

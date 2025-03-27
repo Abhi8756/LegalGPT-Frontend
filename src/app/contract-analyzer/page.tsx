@@ -100,7 +100,11 @@ export default function PDFComplianceAnalyzer() {
 
   return (
     <div className="container mx-auto p-6 max-w-6xl">
+      <h1 className="text-4xl font-bold text-center text-gray-800 dark:text-white mb-10 tracking-tight">
+        LegalGPT Contract Analyzer
+      </h1>
       <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 transition-colors duration-200">
+      
         {/* File Upload Section */}
         <div className="bg-gray-50 dark:bg-gray-900 p-8 border-b border-gray-200 dark:border-gray-700">
           <form onSubmit={handleSubmit} className="space-y-6">

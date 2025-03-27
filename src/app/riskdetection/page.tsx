@@ -220,7 +220,7 @@ export default function RiskDetection() {
                       >
                         <div className="font-semibold text-gray-800 mb-3 text-lg">{item.clause}</div>
                         <div className="text-gray-700">
-                          <span className="font-bold text-emerald-600 inline-block mb-1">Why it's good: </span>
+                          <span className="font-bold text-emerald-600 inline-block mb-1">Why it&apos;s good: </span>
                           {item.reason}
                         </div>
                       </div>

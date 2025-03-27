@@ -155,7 +155,7 @@ const ContactPage = () => {
             <CardHeader className="space-y-2 text-center pb-8 pt-8">
               <CardTitle className="text-3xl md:text-4xl font-bold tracking-tight">Get in Touch</CardTitle>
               <CardDescription className="text-base md:text-lg text-muted-foreground font-medium">
-                Fill out the form below and we'll get back to you as soon as possible.
+                Fill out the form below and we&apos;ll get back to you as soon as possible.
               </CardDescription>
             </CardHeader>
             <Separator className="mb-8" />

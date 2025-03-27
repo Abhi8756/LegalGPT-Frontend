@@ -1,14 +1,29 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
+
+interface Clause {
+  clause: string;
+  reason?: string;
+  risk?: string;
+}
+
+interface Recommendation extends Clause {
+  suggested_rewrite: string;
+}
+
+interface AnalysisResult {
+  good_clauses: Clause[];
+  risk_clauses: Clause[];
+  recommendations: Recommendation[];
+}
 
 export default function RiskDetection() {
   const [file, setFile] = useState<File | null>(null)
   const [fileName, setFileName] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const [analysis, setAnalysis] = useState<any>(null)
+  const [analysis, setAnalysis] = useState<AnalysisResult | null>(null)
   const [error, setError] = useState("")
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,10 +75,10 @@ export default function RiskDetection() {
         throw new Error("Failed to analyze the contract")
       }
 
-      const data = await response.json()
+      const data: AnalysisResult = await response.json()
       setAnalysis(data)
-    } catch (err: any) {
-      setError(err.message || "Something went wrong")
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong")
     } finally {
       setIsLoading(false)
     }
@@ -198,7 +213,7 @@ export default function RiskDetection() {
 
                 {analysis.good_clauses && analysis.good_clauses.length > 0 ? (
                   <div className="space-y-5">
-                    {analysis.good_clauses.map((item: any, index: number) => (
+                    {analysis.good_clauses.map((item: Clause, index: number) => (
                       <div
                         key={index}
                         className="border border-emerald-200 bg-emerald-50 rounded-lg p-5 hover:bg-emerald-100 transition-colors duration-200"
@@ -238,7 +253,7 @@ export default function RiskDetection() {
 
                 {analysis.risk_clauses && analysis.risk_clauses.length > 0 ? (
                   <div className="space-y-5">
-                    {analysis.risk_clauses.map((item: any, index: number) => (
+                    {analysis.risk_clauses.map((item: Clause, index: number) => (
                       <div
                         key={index}
                         className="border border-rose-200 bg-rose-50 rounded-lg p-5 hover:bg-rose-100 transition-colors duration-200"
@@ -278,7 +293,7 @@ export default function RiskDetection() {
                 </h2>
 
                 <div className="space-y-6">
-                  {analysis.recommendations.map((item: any, index: number) => (
+                  {analysis.recommendations.map((item: Recommendation, index: number) => (
                     <div
                       key={index}
                       className="border border-indigo-200 bg-indigo-50 rounded-lg p-5 hover:bg-indigo-100 transition-colors duration-200"

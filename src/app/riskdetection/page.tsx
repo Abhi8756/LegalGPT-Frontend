@@ -156,7 +156,7 @@ export default function RiskDetection() {
             <div className="mt-8 text-center">
               <button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 shadow-md disabled:opacity-50 text-lg"
+                className="bg-blue-500 text-white font-bold py-3 px-5 rounded-md hover:bg-blue-600 transition-colors duration-300"
                 disabled={isLoading || !file}
               >
                 {isLoading ? (

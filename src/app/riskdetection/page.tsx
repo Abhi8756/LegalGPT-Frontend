@@ -66,7 +66,7 @@ export default function RiskDetection() {
     formData.append("file", file)
 
     try {
-      const response = await fetch("https://risk-legal.onrender.com/upload", {
+      const response = await fetch("https://risk-legal-brb3.onrender.com/upload", {
         method: "POST",
         body: formData,
       })

@@ -44,21 +44,33 @@ export default function ContractGeneratorForm() {
       jurisdiction: jurisdiction
     };
   
-    try {
-      const response = await fetch("https://contractgen-7xo7.onrender.com/generate", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-      
-      // Rest of the code remains the same
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to generate contract");
-    } finally {
-      setIsLoading(false);
-    }
+    // Change this in the handleSubmit function
+try {
+  const response = await fetch("/api/proxy/generate", {  // Use your proxy endpoint
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+  // Add this after the fetch call in handleSubmit
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || "Failed to generate contract");
+  }
+
+  const data = await response.json();
+  setContractText(data.contract || data.text || JSON.stringify(data));
+  setSuccess(true);
+
+  // Rest of your code remains the same
+} catch (err) {
+  setError(err instanceof Error ? err.message : "Failed to generate contract");
+} finally {
+  setIsLoading(false);
+}
+
+
   };
 
   return (

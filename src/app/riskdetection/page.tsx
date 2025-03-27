@@ -1,14 +1,29 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
+
+interface Clause {
+  clause: string;
+  reason?: string;
+  risk?: string;
+}
+
+interface Recommendation extends Clause {
+  suggested_rewrite: string;
+}
+
+interface AnalysisResult {
+  good_clauses: Clause[];
+  risk_clauses: Clause[];
+  recommendations: Recommendation[];
+}
 
 export default function RiskDetection() {
   const [file, setFile] = useState<File | null>(null)
   const [fileName, setFileName] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const [analysis, setAnalysis] = useState<any>(null)
+  const [analysis, setAnalysis] = useState<AnalysisResult | null>(null)
   const [error, setError] = useState("")
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,28 +75,26 @@ export default function RiskDetection() {
         throw new Error("Failed to analyze the contract")
       }
 
-      const data = await response.json()
+      const data: AnalysisResult = await response.json()
       setAnalysis(data)
-    } catch (err: any) {
-      setError(err.message || "Something went wrong")
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong")
     } finally {
       setIsLoading(false)
     }
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-purple-50">
-      <main className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-extrabold text-center text-indigo-800 mb-10 tracking-tight">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
-            LegalGPT Contract Analyzer
-          </span>
+    <div className="min-h-screen bg-white">
+      <main className="container mx-auto px-4 py-12 max-w-6xl">
+        <h1 className="text-4xl font-bold text-center text-gray-800 mb-10 tracking-tight">
+          LegalGPT Risk Detection
         </h1>
 
-        <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 mb-10 border border-indigo-100">
+        <div className="bg-white rounded-lg shadow-md border border-gray-200 p-8 mb-10">
           <form onSubmit={handleSubmit}>
             <div
-              className="border-3 border-dashed border-indigo-200 rounded-xl p-10 text-center cursor-pointer hover:border-indigo-400 transition-all duration-300 bg-indigo-50/50"
+              className="border-2 border-dashed border-gray-300 rounded-lg p-10 text-center cursor-pointer hover:border-blue-500 transition-all duration-300 bg-gray-50"
               onDragOver={handleDragOver}
               onDrop={handleDrop}
               onClick={() => document.getElementById("file-upload")?.click()}
@@ -98,7 +111,7 @@ export default function RiskDetection() {
                 <div className="flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-10 w-10 text-indigo-500 mr-3"
+                    className="h-10 w-10 text-blue-600 mr-3"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -110,13 +123,13 @@ export default function RiskDetection() {
                       d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                     />
                   </svg>
-                  <span className="text-indigo-700 font-medium text-lg">{fileName}</span>
+                  <span className="text-gray-700 font-medium text-lg">{fileName}</span>
                 </div>
               ) : (
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-16 w-16 text-indigo-400 mx-auto mb-6"
+                    className="h-16 w-16 text-gray-400 mx-auto mb-6"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -128,8 +141,8 @@ export default function RiskDetection() {
                       d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                     />
                   </svg>
-                  <p className="text-indigo-600 font-medium text-lg mb-2">Drag and drop your PDF contract here</p>
-                  <p className="text-indigo-400 text-sm">or click to browse files</p>
+                  <p className="text-gray-600 font-medium text-lg mb-2">Drag and drop your PDF contract here</p>
+                  <p className="text-gray-500 text-sm">or click to browse files</p>
                 </div>
               )}
             </div>
@@ -143,7 +156,7 @@ export default function RiskDetection() {
             <div className="mt-8 text-center">
               <button
                 type="submit"
-                className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-3 px-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-300 shadow-md disabled:opacity-50 text-lg"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 shadow-md disabled:opacity-50 text-lg"
                 disabled={isLoading || !file}
               >
                 {isLoading ? (
@@ -179,11 +192,11 @@ export default function RiskDetection() {
         </div>
 
         {analysis && (
-          <div className="space-y-10">
+          <div className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Good Clauses Column */}
-              <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-emerald-500 hover:shadow-xl transition-shadow duration-300">
-                <h2 className="text-2xl font-bold text-emerald-700 mb-6 flex items-center">
+              <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
+                <h2 className="text-2xl font-bold text-green-700 mb-6 flex items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-7 w-7 mr-3"
@@ -197,15 +210,15 @@ export default function RiskDetection() {
                 </h2>
 
                 {analysis.good_clauses && analysis.good_clauses.length > 0 ? (
-                  <div className="space-y-5">
-                    {analysis.good_clauses.map((item: any, index: number) => (
+                  <div className="space-y-4">
+                    {analysis.good_clauses.map((item: Clause, index: number) => (
                       <div
                         key={index}
-                        className="border border-emerald-200 bg-emerald-50 rounded-lg p-5 hover:bg-emerald-100 transition-colors duration-200"
+                        className="border border-green-200 bg-green-50 rounded-lg p-4 hover:shadow-sm transition-shadow duration-200"
                       >
-                        <div className="font-semibold text-gray-800 mb-3 text-lg">{item.clause}</div>
+                        <div className="font-semibold text-gray-800 mb-2 text-lg">{item.clause}</div>
                         <div className="text-gray-700">
-                          <span className="font-bold text-emerald-600 inline-block mb-1">Why it's good: </span>
+                          <span className="font-bold text-green-600 inline-block mb-1">Why it&apos;s good: </span>
                           {item.reason}
                         </div>
                       </div>
@@ -217,8 +230,8 @@ export default function RiskDetection() {
               </div>
 
               {/* Risk Clauses Column */}
-              <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-rose-500 hover:shadow-xl transition-shadow duration-300">
-                <h2 className="text-2xl font-bold text-rose-700 mb-6 flex items-center">
+              <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
+                <h2 className="text-2xl font-bold text-red-700 mb-6 flex items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-7 w-7 mr-3"
@@ -237,15 +250,15 @@ export default function RiskDetection() {
                 </h2>
 
                 {analysis.risk_clauses && analysis.risk_clauses.length > 0 ? (
-                  <div className="space-y-5">
-                    {analysis.risk_clauses.map((item: any, index: number) => (
+                  <div className="space-y-4">
+                    {analysis.risk_clauses.map((item: Clause, index: number) => (
                       <div
                         key={index}
-                        className="border border-rose-200 bg-rose-50 rounded-lg p-5 hover:bg-rose-100 transition-colors duration-200"
+                        className="border border-red-200 bg-red-50 rounded-lg p-4 hover:shadow-sm transition-shadow duration-200"
                       >
-                        <div className="font-semibold text-gray-800 mb-3 text-lg">{item.clause}</div>
+                        <div className="font-semibold text-gray-800 mb-2 text-lg">{item.clause}</div>
                         <div className="text-gray-700">
-                          <span className="font-bold text-rose-600 inline-block mb-1">Risk: </span>
+                          <span className="font-bold text-red-600 inline-block mb-1">Risk: </span>
                           {item.risk}
                         </div>
                       </div>
@@ -258,8 +271,8 @@ export default function RiskDetection() {
             </div>
 
             {analysis.recommendations && analysis.recommendations.length > 0 && (
-              <div className="bg-white rounded-xl shadow-lg p-6 border-t-4 border-indigo-500 hover:shadow-xl transition-shadow duration-300">
-                <h2 className="text-2xl font-bold text-indigo-700 mb-6 flex items-center">
+              <div className="bg-white rounded-lg shadow-md p-6 border-t-4 border-blue-500">
+                <h2 className="text-2xl font-bold text-blue-700 mb-6 flex items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-7 w-7 mr-3"
@@ -278,18 +291,18 @@ export default function RiskDetection() {
                 </h2>
 
                 <div className="space-y-6">
-                  {analysis.recommendations.map((item: any, index: number) => (
+                  {analysis.recommendations.map((item: Recommendation, index: number) => (
                     <div
                       key={index}
-                      className="border border-indigo-200 bg-indigo-50 rounded-lg p-5 hover:bg-indigo-100 transition-colors duration-200"
+                      className="border border-blue-200 bg-blue-50 rounded-lg p-5 hover:shadow-sm transition-shadow duration-200"
                     >
                       <div className="font-semibold text-gray-800 mb-3 text-lg">{item.clause}</div>
                       <div className="text-gray-700 mb-4">
-                        <span className="font-bold text-indigo-600 inline-block mb-1">Reason: </span>
+                        <span className="font-bold text-blue-600 inline-block mb-1">Reason: </span>
                         {item.reason}
                       </div>
-                      <div className="bg-white p-4 rounded-lg border border-indigo-200 shadow-sm">
-                        <span className="font-bold text-indigo-600 inline-block mb-2">Suggested rewrite: </span>
+                      <div className="bg-white p-4 rounded-lg border border-blue-200 shadow-sm">
+                        <span className="font-bold text-blue-600 inline-block mb-2">Suggested rewrite: </span>
                         <p className="text-gray-800 italic">{item.suggested_rewrite}</p>
                       </div>
                     </div>
@@ -303,4 +316,3 @@ export default function RiskDetection() {
     </div>
   )
 }
-

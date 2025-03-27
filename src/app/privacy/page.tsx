@@ -103,7 +103,7 @@ export default function PrivacyPolicyPage() {
                 </li>
                 <li>
                   <Link href="#children" className="text-muted-foreground hover:text-primary flex items-center">
-                    Children's Privacy <ArrowUpRight className="ml-1 h-3 w-3" />
+                    Children&apos;s Privacy <ArrowUpRight className="ml-1 h-3 w-3" />
                   </Link>
                 </li>
                 <li>
@@ -297,7 +297,7 @@ export default function PrivacyPolicyPage() {
       <AccordionTrigger>Correction and Deletion</AccordionTrigger>
       <AccordionContent>
         <p className="text-muted-foreground">
-          You can request that we correct inaccurate information or delete your personal data in certain circumstances, such as when it's no longer needed for the purposes for which it was collected.
+          You can request that we correct inaccurate information or delete your personal data in certain circumstances, such as when it&apos;s no longer needed for the purposes for which it was collected.
         </p>
       </AccordionContent>
     </AccordionItem>
@@ -372,7 +372,7 @@ export default function PrivacyPolicyPage() {
 <section id="children">
   <div className="flex items-center gap-2 mb-4">
     <Shield className="h-5 w-5 text-primary" />
-    <h2 className="text-2xl font-semibold">Children's Privacy</h2>
+    <h2 className="text-2xl font-semibold">Children&apos;s Privacy</h2>
   </div>
   <Card className="bg-primary/5 border-primary/20">
     <CardContent className="pt-6">
@@ -401,7 +401,7 @@ export default function PrivacyPolicyPage() {
       <AccordionContent>
         <p className="text-muted-foreground">
           We may update our Privacy Policy from time to time. We will notify you of any changes by posting the 
-          new Privacy Policy on this page and updating the "Last Updated" date.
+          new Privacy Policy on this page and updating the Last Updated date.
         </p>
       </AccordionContent>
     </AccordionItem>

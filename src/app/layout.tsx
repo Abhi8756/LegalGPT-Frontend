@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className="__variable_4d318d __variable_ea5f4b antialiased"
-        
+        cz-shortcut-listen="true"
       >
         <Navbar />
         {children}

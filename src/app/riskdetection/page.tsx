@@ -85,44 +85,46 @@ export default function RiskDetection() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-black">
       <main className="container mx-auto px-4 py-12 max-w-6xl">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-10 tracking-tight">
-          LegalGPT Risk Detection
-        </h1>
+      <div className="flex justify-end mb-4">
+      </div>
+      <h1 className="text-4xl font-bold text-center text-gray-800 dark:text-white mb-10 tracking-tight">
+        LegalGPT Risk Detection
+      </h1>
 
-        <div className="bg-white rounded-lg shadow-md border border-gray-200 p-8 mb-10">
-          <form onSubmit={handleSubmit}>
-            <div
-              className="border-2 border-dashed border-gray-300 rounded-lg p-10 text-center cursor-pointer hover:border-blue-500 transition-all duration-300 bg-gray-50"
-              onDragOver={handleDragOver}
-              onDrop={handleDrop}
-              onClick={() => document.getElementById("file-upload")?.click()}
+      <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 p-8 mb-10">
+        <form onSubmit={handleSubmit}>
+        <div
+          className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-10 text-center cursor-pointer hover:border-blue-500 dark:hover:border-blue-400 transition-all duration-300 bg-gray-50 dark:bg-gray-800"
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+          onClick={() => document.getElementById("file-upload")?.click()}
+        >
+          <input
+          id="file-upload"
+          type="file"
+          accept="application/pdf"
+          onChange={handleFileChange}
+          className="hidden"
+          />
+
+          {fileName ? (
+          <div className="flex items-center justify-center">
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-10 w-10 text-blue-600 dark:text-blue-400 mr-3"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
             >
-              <input
-                id="file-upload"
-                type="file"
-                accept="application/pdf"
-                onChange={handleFileChange}
-                className="hidden"
-              />
-
-              {fileName ? (
-                <div className="flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-10 w-10 text-blue-600 mr-3"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                    />
-                  </svg>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            />
+            </svg>
                   <span className="text-gray-700 font-medium text-lg">{fileName}</span>
                 </div>
               ) : (

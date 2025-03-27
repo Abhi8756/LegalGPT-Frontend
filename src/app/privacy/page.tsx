@@ -248,8 +248,8 @@ export default function PrivacyPolicyPage() {
               </section>
               
               <Separator />
-
-              {/* Remaining sections would follow the same pattern */}
+                  
+                  {/* Data Security */}
               <section id="security">
                 <div className="flex items-center gap-2 mb-4">
                   <Lock className="h-5 w-5 text-primary" />
@@ -285,7 +285,7 @@ export default function PrivacyPolicyPage() {
                     <div className="bg-muted p-4 rounded-md">
                       <p className="font-medium">LegalGPT</p>
                       <p className="text-muted-foreground">Email: privacy@legalgpt.com</p>
-                      <p className="text-muted-foreground">Address: 123 Legal Street, Suite 100, San Francisco, CA 94102</p>
+                      <p className="text-muted-foreground">VIT University, Vellore </p>
                     </div>
                   </CardContent>
                 </Card>

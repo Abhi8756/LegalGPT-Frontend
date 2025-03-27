@@ -1,5 +1,6 @@
 "use client"
-
+import emailjs from '@emailjs/browser';
+import { useState } from 'react'
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -20,6 +21,12 @@ const ContactFormSchema = z.object({
 })
 
 const ContactPage = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submissionDetails, setSubmissionDetails] = useState<{
+    name: string;
+    email: string;
+  } | null>(null);
+
   const form = useForm({
     resolver: zodResolver(ContactFormSchema),
     defaultValues: {
@@ -30,17 +37,90 @@ const ContactPage = () => {
     },
   })
 
-  const onSubmit = (data: z.infer<typeof ContactFormSchema>) => {
-    console.log("Form Submitted:", data)
+  const onSubmit = async (data: z.infer<typeof ContactFormSchema>) => {
+    try {
+      // Use environment variables for your EmailJS configuration
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
+  
+      // Send the email using EmailJS
+      const response = await emailjs.send(serviceId, templateId, data, publicKey);
+      console.log("Email sent successfully:", response.status, response.text);
+  
+      // Set submission state
+      setSubmissionDetails({
+        name: data.name,
+        email: data.email
+      });
+      setIsSubmitted(true);
+  
+      toast.success(`Thank you ${data.name}, your message has been sent!`, {
+        description: "We'll get back to you as soon as possible.",
+        duration: 5000,
+      });
+      
+      form.reset();
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      toast.error("Failed to send email. Please try again later.");
+    }
+  };
 
-    toast.success(`Thank you ${data.name}, your message has been sent!`, {
-      description: "We'll get back to you as soon as possible.",
-      duration: 5000,
-    })
+  // If submitted, show confirmation
+  if (isSubmitted && submissionDetails) {
+    return (
+      <div className="container mx-auto py-16 px-4 md:px-6 max-w-7xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+          {/* Left Side: Contact Us Heading */}
+          <div className="space-y-8 pr-0 md:pr-12 max-w-xl pt-30">
+            <h1 className="text-5xl font-bold tracking-tight text-foreground leading-tight">
+              Message Sent
+            </h1>
+            <p className="text-xl text-muted-foreground leading-relaxed font-medium">
+              Thank you, {submissionDetails.name}! We have received your message at {submissionDetails.email}.
+            </p>
+            <Button 
+              onClick={() => {
+                setIsSubmitted(false);
+                setSubmissionDetails(null);
+              }} 
+              className="mt-4"
+            >
+              Send Another Message
+            </Button>
+          </div>
 
-    form.reset()
+          {/* Right Side: Original Contact Info */}
+          <div>
+            <Card className="shadow-xl border border-slate-200/50 dark:border-slate-800/50 bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 overflow-hidden">
+              <CardHeader className="space-y-2 text-center pb-8 pt-8">
+                <CardTitle className="text-3xl md:text-4xl font-bold tracking-tight">Confirmation Details</CardTitle>
+                <CardDescription className="text-base md:text-lg text-muted-foreground font-medium">
+                  Your message has been successfully submitted.
+                </CardDescription>
+              </CardHeader>
+              <Separator className="mb-8" />
+              <CardContent className="px-6 md:px-8">
+                <div className="space-y-4">
+                  <div>
+                    <p className="font-semibold">Name:</p>
+                    <p>{submissionDetails.name}</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold">Email:</p>
+                    <p>{submissionDetails.email}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    );
   }
 
+  // Original form rendering
   return (
     <div className="container mx-auto py-16 px-4 md:px-6 max-w-7xl">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
@@ -187,4 +267,3 @@ const ContactPage = () => {
 }
 
 export default ContactPage
-

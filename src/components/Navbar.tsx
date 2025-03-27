@@ -26,8 +26,8 @@ const Navbar = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="flex h-16 items-center justify-between px-4 md:px-6 max-w-7xl mx-auto">
+    <header className="sticky top-0 z-50 w-full border-b-2 border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="flex h-16 items-center justify-between px-4 md:px-8 max-w-7xl mx-auto">
         {/* Left section - Logo (Same for both mobile and desktop) */}
         <div className="flex items-center">
           <Link
@@ -124,12 +124,12 @@ const Navbar = () => {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] sm:w-[540px]">
-              <SheetHeader className="border-b pb-4 mb-4">
+              <SheetHeader className="border-b-2 pb-4 mb-4">
                 <SheetTitle className="text-xl">Menu</SheetTitle>
               </SheetHeader>
               <nav className="grid gap-4 py-2">
                 {/* Mobile Features Dropdown */}
-                <details className="group border-b pb-2">
+                <details className="group border-b-2 pb-2">
                   <summary className="cursor-pointer py-2 font-medium flex items-center justify-between">
                     Features
                     <span className="group-open:rotate-180 transition-transform">▼</span>
@@ -158,11 +158,10 @@ const Navbar = () => {
                     </Link>
                   </div>
                 </details>
-
                 {/* Mobile Pricing Link */}
                 <Link 
                   href="/pricing" 
-                  className="py-2 font-medium border-b pb-2 hover:bg-accent hover:text-accent-foreground rounded-md px-2"
+                  className="py-2 font-medium border-b-2 pb-2 hover:bg-accent hover:text-accent-foreground rounded-md px-2"
                   onClick={toggleMenu}
                 >
                   Pricing
@@ -171,7 +170,7 @@ const Navbar = () => {
                 {/* Mobile Contact Link */}
                 <Link 
                   href="/contact" 
-                  className="py-2 font-medium border-b pb-2 hover:bg-accent hover:text-accent-foreground rounded-md px-2"
+                  className="py-2 font-medium border-b-2 pb-2 hover:bg-accent hover:text-accent-foreground rounded-md px-2"
                   onClick={toggleMenu}
                 >
                   Contact Us

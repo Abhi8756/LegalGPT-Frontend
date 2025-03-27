@@ -59,7 +59,7 @@ const Navbar = () => {
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-2 p-2 md:w-[500px] bg-popover shadow-lg rounded-xl">
                     <ListItem
-                      href="/generate-contract"
+                      href="/contract-generation"
                       title="Generate Contract"
                     >
                       Create legal contracts with AI assistance
@@ -136,7 +136,7 @@ const Navbar = () => {
                   </summary>
                   <div className="pl-4 mt-2 space-y-2">
                     <Link 
-                      href="/generate-contract" 
+                      href="/contract-generation" 
                       className="block py-2 hover:bg-accent hover:text-accent-foreground rounded-md px-2"
                       onClick={toggleMenu}
                     >

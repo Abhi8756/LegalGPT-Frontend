@@ -3,10 +3,10 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { useTheme } from 'next-themes';
+// import { useTheme } from 'next-themes';
 
 const TermsAndConditions: React.FC = () => {
-  const { theme } = useTheme();
+  // const { theme } = useTheme();
   
   return (
     <main className="flex-grow flex items-center justify-center p-6 bg-white text-black dark:bg-black dark:text-white">
@@ -49,7 +49,7 @@ const TermsAndConditions: React.FC = () => {
 
             <section>
               <h2 className="text-2xl font-semibold mb-4 text-gray-600 dark:text-gray-300">4. Limitation of Liability</h2>
-              <p>4.1 LegalGPT provides services "as is" and does not guarantee absolute accuracy of legal documents.</p>
+              <p>4.1 LegalGPT provides services as is and does not guarantee absolute accuracy of legal documents.</p>
               <p>4.2 Users are advised to consult with a qualified legal professional for critical legal matters.</p>
             </section>
 

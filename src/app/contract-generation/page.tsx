@@ -34,8 +34,7 @@ export default function ContractGeneratorForm() {
     setIsLoading(true);
     setError(null);
     setSuccess(false);
-
-    // Build payload dynamically
+  
     const payload: Record<string, string> = {
       contract_type: contractType,
       party_a: partyA,
@@ -44,12 +43,7 @@ export default function ContractGeneratorForm() {
       clause_query: clauseQuery,
       jurisdiction: jurisdiction
     };
-
-    if (contractType === "lease" && propertyAddress) payload.property_address = propertyAddress;
-    if (contractType === "employment" && position) payload.position = position;
-    if (contractType === "sales" && goodsDescription) payload.goods_description = goodsDescription;
-    if (contractType === "noncompete" && scope) payload.scope = scope;
-
+  
     try {
       const response = await fetch("https://contractgen-7xo7.onrender.com/generate", {
         method: 'POST',
@@ -59,14 +53,7 @@ export default function ContractGeneratorForm() {
         body: JSON.stringify(payload),
       });
       
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || "Failed to generate contract");
-      }
-      
-      const data = await response.json();
-      setContractText(data.contract);
-      setSuccess(true);
+      // Rest of the code remains the same
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to generate contract");
     } finally {

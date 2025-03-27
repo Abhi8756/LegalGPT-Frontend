@@ -6,11 +6,7 @@ export async function POST(req: Request) {
 
     const response = await fetch('https://compliance-4fkw.onrender.com/upload', {
       method: 'POST',
-      body: formData,
-      headers: {
-        // Pass headers but avoid CORS issues
-        'Accept': 'application/json',
-      },
+      body: formData
     });
 
     if (!response.ok) {

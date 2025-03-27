@@ -197,119 +197,119 @@ export default function RiskDetection() {
           <div className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Good Clauses Column */}
-              <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
-                <h2 className="text-2xl font-bold text-green-700 mb-6 flex items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-7 w-7 mr-3"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Good Clauses
-                </h2>
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border-l-4 border-green-500 dark:border-green-400">
+          <h2 className="text-2xl font-bold text-green-700 dark:text-green-400 mb-6 flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-7 w-7 mr-3"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            Good Clauses
+          </h2>
 
-                {analysis.good_clauses && analysis.good_clauses.length > 0 ? (
-                  <div className="space-y-4">
-                    {analysis.good_clauses.map((item: Clause, index: number) => (
-                      <div
-                        key={index}
-                        className="border border-green-200 bg-green-50 rounded-lg p-4 hover:shadow-sm transition-shadow duration-200"
-                      >
-                        <div className="font-semibold text-gray-800 mb-2 text-lg">{item.clause}</div>
-                        <div className="text-gray-700">
-                          <span className="font-bold text-green-600 inline-block mb-1">Why it&apos;s good: </span>
-                          {item.reason}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-gray-500 italic text-center py-6">No good clauses identified</p>
-                )}
+          {analysis.good_clauses && analysis.good_clauses.length > 0 ? (
+            <div className="space-y-4">
+              {analysis.good_clauses.map((item: Clause, index: number) => (
+                <div
+            key={index}
+            className="border border-green-200 dark:border-green-600 bg-green-50 dark:bg-green-900 rounded-lg p-4 hover:shadow-sm transition-shadow duration-200"
+                >
+            <div className="font-semibold text-gray-800 dark:text-gray-200 mb-2 text-lg">{item.clause}</div>
+            <div className="text-gray-700 dark:text-gray-300">
+              <span className="font-bold text-green-600 dark:text-green-400 inline-block mb-1">Why it&apos;s good: </span>
+              {item.reason}
+            </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-500 dark:text-gray-400 italic text-center py-6">No good clauses identified</p>
+          )}
               </div>
 
               {/* Risk Clauses Column */}
-              <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
-                <h2 className="text-2xl font-bold text-red-700 mb-6 flex items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-7 w-7 mr-3"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                    />
-                  </svg>
-                  Risk Clauses
-                </h2>
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border-l-4 border-red-500 dark:border-red-400">
+          <h2 className="text-2xl font-bold text-red-700 dark:text-red-400 mb-6 flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-7 w-7 mr-3"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+            Risk Clauses
+          </h2>
 
-                {analysis.risk_clauses && analysis.risk_clauses.length > 0 ? (
-                  <div className="space-y-4">
-                    {analysis.risk_clauses.map((item: Clause, index: number) => (
-                      <div
-                        key={index}
-                        className="border border-red-200 bg-red-50 rounded-lg p-4 hover:shadow-sm transition-shadow duration-200"
-                      >
-                        <div className="font-semibold text-gray-800 mb-2 text-lg">{item.clause}</div>
-                        <div className="text-gray-700">
-                          <span className="font-bold text-red-600 inline-block mb-1">Risk: </span>
-                          {item.risk}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-gray-500 italic text-center py-6">No risk clauses identified</p>
-                )}
+          {analysis.risk_clauses && analysis.risk_clauses.length > 0 ? (
+            <div className="space-y-4">
+              {analysis.risk_clauses.map((item: Clause, index: number) => (
+                <div
+            key={index}
+            className="border border-red-200 dark:border-red-600 bg-red-50 dark:bg-red-900 rounded-lg p-4 hover:shadow-sm transition-shadow duration-200"
+                >
+            <div className="font-semibold text-gray-800 dark:text-gray-200 mb-2 text-lg">{item.clause}</div>
+            <div className="text-gray-700 dark:text-gray-300">
+              <span className="font-bold text-red-600 dark:text-red-400 inline-block mb-1">Risk: </span>
+              {item.risk}
+            </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-500 dark:text-gray-400 italic text-center py-6">No risk clauses identified</p>
+          )}
               </div>
             </div>
 
             {analysis.recommendations && analysis.recommendations.length > 0 && (
-              <div className="bg-white rounded-lg shadow-md p-6 border-t-4 border-blue-500">
-                <h2 className="text-2xl font-bold text-blue-700 mb-6 flex items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-7 w-7 mr-3"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  Recommendations
-                </h2>
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border-t-4 border-blue-500 dark:border-blue-400">
+          <h2 className="text-2xl font-bold text-blue-700 dark:text-blue-400 mb-6 flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-7 w-7 mr-3"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            Recommendations
+          </h2>
 
-                <div className="space-y-6">
-                  {analysis.recommendations.map((item: Recommendation, index: number) => (
-                    <div
-                      key={index}
-                      className="border border-blue-200 bg-blue-50 rounded-lg p-5 hover:shadow-sm transition-shadow duration-200"
-                    >
-                      <div className="font-semibold text-gray-800 mb-3 text-lg">{item.clause}</div>
-                      <div className="text-gray-700 mb-4">
-                        <span className="font-bold text-blue-600 inline-block mb-1">Reason: </span>
-                        {item.reason}
-                      </div>
-                      <div className="bg-white p-4 rounded-lg border border-blue-200 shadow-sm">
-                        <span className="font-bold text-blue-600 inline-block mb-2">Suggested rewrite: </span>
-                        <p className="text-gray-800 italic">{item.suggested_rewrite}</p>
-                      </div>
-                    </div>
-                  ))}
+          <div className="space-y-6">
+            {analysis.recommendations.map((item: Recommendation, index: number) => (
+              <div
+                key={index}
+                className="border border-blue-200 dark:border-blue-600 bg-blue-50 dark:bg-blue-900 rounded-lg p-5 hover:shadow-sm transition-shadow duration-200"
+              >
+                <div className="font-semibold text-gray-800 dark:text-gray-200 mb-3 text-lg">{item.clause}</div>
+                <div className="text-gray-700 dark:text-gray-300 mb-4">
+            <span className="font-bold text-blue-600 dark:text-blue-400 inline-block mb-1">Reason: </span>
+            {item.reason}
                 </div>
+                <div className="bg-white dark:bg-gray-700 p-4 rounded-lg border border-blue-200 dark:border-blue-600 shadow-sm">
+            <span className="font-bold text-blue-600 dark:text-blue-400 inline-block mb-2">Suggested rewrite: </span>
+            <p className="text-gray-800 dark:text-gray-200 italic">{item.suggested_rewrite}</p>
+                </div>
+              </div>
+            ))}
+          </div>
               </div>
             )}
           </div>

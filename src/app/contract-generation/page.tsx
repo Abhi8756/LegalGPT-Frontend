@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import { Label } from "@/components/ui/label2";
 import { Input } from "@/components/ui/input2";
-import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function ContractGeneratorForm() {
   // Contract types array
@@ -25,6 +25,7 @@ export default function ContractGeneratorForm() {
   const [goodsDescription, setGoodsDescription] = useState<string>('');
   const [scope, setScope] = useState<string>('');
   const [contractText, setContractText] = useState<string>('');
+  const [pdfUrl, setPdfUrl] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
@@ -34,7 +35,8 @@ export default function ContractGeneratorForm() {
     setIsLoading(true);
     setError(null);
     setSuccess(false);
-  
+    setPdfUrl('');
+
     const payload: Record<string, string> = {
       contract_type: contractType,
       party_a: partyA,
@@ -43,39 +45,32 @@ export default function ContractGeneratorForm() {
       clause_query: clauseQuery,
       jurisdiction: jurisdiction
     };
-  
-    // Change this in the handleSubmit function
-try {
-  const response = await fetch("/api/proxy/generate", {  // Use your proxy endpoint
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  });
-  // Add this after the fetch call in handleSubmit
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.error || "Failed to generate contract");
-  }
 
-  const data = await response.json();
-  setContractText(data.contract || data.text || JSON.stringify(data));
-  setSuccess(true);
-
-  // Rest of your code remains the same
-} catch (err) {
-  setError(err instanceof Error ? err.message : "Failed to generate contract");
-} finally {
-  setIsLoading(false);
-}
-
-
+    try {
+      const response = await fetch("/api/proxy/generate", {  // Use your proxy endpoint
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to generate contract");
+      }
+      const data = await response.json();
+      setContractText(data.contract || data.text || JSON.stringify(data));
+      setPdfUrl(data.pdf_url || "");
+      setSuccess(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to generate contract");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="shadow-input mx-auto w-full max-w-3xl rounded-none bg-white p-6 md:rounded-2xl md:p-10 dark:bg-black">
-
       <h2 className="text-5xl font-bold text-neutral-800 dark:text-neutral-200">
         Contract Generator
       </h2>
@@ -83,14 +78,14 @@ try {
         Fill the form to generate a legally formatted, Indian-law compliant contract.
       </p>
 
-      <form className="my-8" onSubmit={handleSubmit}>
-        <LabelInputContainer className="mb-4">
+      <form className="my-8 space-y-4" onSubmit={handleSubmit}>
+        <LabelInputContainer>
           <Label htmlFor="contract-type">Contract Type</Label>
           <select 
             id="contract-type"
             value={contractType} 
             onChange={(e) => setContractType(e.target.value)}
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
             {contractTypes.map(type => (
               <option key={type} value={type}>
@@ -100,7 +95,7 @@ try {
           </select>
         </LabelInputContainer>
 
-        <LabelInputContainer className="mb-4">
+        <LabelInputContainer>
           <Label htmlFor="party-a">Party A</Label>
           <Input 
             id="party-a"
@@ -110,7 +105,7 @@ try {
           />
         </LabelInputContainer>
 
-        <LabelInputContainer className="mb-4">
+        <LabelInputContainer>
           <Label htmlFor="party-b">Party B</Label>
           <Input 
             id="party-b"
@@ -120,7 +115,7 @@ try {
           />
         </LabelInputContainer>
 
-        <LabelInputContainer className="mb-4">
+        <LabelInputContainer>
           <Label htmlFor="duration">Duration</Label>
           <Input 
             id="duration"
@@ -130,7 +125,7 @@ try {
           />
         </LabelInputContainer>
 
-        <LabelInputContainer className="mb-4">
+        <LabelInputContainer>
           <Label htmlFor="clause-topic">Clause Topic</Label>
           <Input 
             id="clause-topic"
@@ -140,7 +135,7 @@ try {
           />
         </LabelInputContainer>
 
-        <LabelInputContainer className="mb-4">
+        <LabelInputContainer>
           <Label htmlFor="jurisdiction">Jurisdiction</Label>
           <Input 
             id="jurisdiction"
@@ -150,7 +145,7 @@ try {
         </LabelInputContainer>
 
         {contractType === "lease" && (
-          <LabelInputContainer className="mb-4">
+          <LabelInputContainer>
             <Label htmlFor="property-address">Property Address</Label>
             <Input 
               id="property-address"
@@ -162,7 +157,7 @@ try {
         )}
 
         {contractType === "employment" && (
-          <LabelInputContainer className="mb-4">
+          <LabelInputContainer>
             <Label htmlFor="position">Position Title</Label>
             <Input 
               id="position"
@@ -174,7 +169,7 @@ try {
         )}
 
         {contractType === "sales" && (
-          <LabelInputContainer className="mb-4">
+          <LabelInputContainer>
             <Label htmlFor="goods-description">Goods or Services Description</Label>
             <Input 
               id="goods-description"
@@ -186,7 +181,7 @@ try {
         )}
 
         {contractType === "noncompete" && (
-          <LabelInputContainer className="mb-4">
+          <LabelInputContainer>
             <Label htmlFor="scope">Scope of Restriction</Label>
             <Input 
               id="scope"
@@ -198,7 +193,7 @@ try {
         )}
 
         <button
-          className="group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
+          className="group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset] focus:outline-none focus:ring-2 focus:ring-offset-2"
           type="submit"
           disabled={isLoading}
         >
@@ -221,14 +216,24 @@ try {
       )}
       
       {success && (
-        <div className="mt-4">
-          <h3 className="text-lg font-semibold mb-2">📜 Contract Content</h3>
+        <div className="mt-8 space-y-4">
+          <h3 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-200">📜 Contract Content</h3>
           <Textarea 
             value={contractText} 
             readOnly 
             rows={15}
-            className="w-full font-mono text-sm"
+            className="w-full font-mono text-sm border border-gray-300 dark:border-gray-700 p-2 rounded-md"
           />
+          {pdfUrl && (
+            <a
+              href={pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-2 rounded-md bg-blue-600 px-4 py-2 text-center text-white font-medium hover:bg-blue-700 transition"
+            >
+              Click to download the PDF
+            </a>
+          )}
         </div>
       )}
     </div>

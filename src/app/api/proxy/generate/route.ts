@@ -5,7 +5,7 @@ export async function POST(request: Request) {
       const payload = await request.json();
       
       // Forward the request to the actual API
-      const response = await fetch('https://contractgen-7xo7.onrender.com/generate', {
+      const response = await fetch('https://contractpdf.onrender.com/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -48,7 +48,7 @@
       const timeoutId = setTimeout(() => controller.abort(), 5 * 60 * 1000);
 
       try {
-        const response = await fetch('/api/proxy', {
+        const response = await fetch('/api/proxy/analyze', {
           method: 'POST',
           body: formData,
         });

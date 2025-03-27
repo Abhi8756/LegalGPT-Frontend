@@ -248,30 +248,175 @@ export default function PrivacyPolicyPage() {
               </section>
               
               <Separator />
-                  
-                  {/* Data Security */}
-              <section id="security">
-                <div className="flex items-center gap-2 mb-4">
-                  <Lock className="h-5 w-5 text-primary" />
-                  <h2 className="text-2xl font-semibold">Data Security</h2>
-                </div>
-                <Card className="bg-primary/5 border-primary/20">
-                  <CardContent className="pt-6">
-                    <p className="text-muted-foreground">
-                      We implement appropriate technical and organizational measures to protect your personal information 
-                      and document data. These measures include encryption, access controls, regular security assessments, 
-                      and staff training. However, no method of transmission over the Internet or electronic storage is 100% 
-                      secure, and we cannot guarantee absolute security.
-                    </p>
-                  </CardContent>
-                </Card>
-              </section>
-              
-              <Separator />
+                  {/* Sharing Your Information */}
+<section id="sharing">
+  <div className="flex items-center gap-2 mb-4">
+    <Info className="h-5 w-5 text-primary" />
+    <h2 className="text-2xl font-semibold">Sharing Your Information</h2>
+  </div>
+  <Card>
+    <CardContent className="pt-6">
+      <p className="text-muted-foreground mb-4">
+        We do not sell your personal information or document data. We may share information with:
+      </p>
+      <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+        <li>Service providers who assist us in operating our platform</li>
+        <li>Legal and regulatory authorities when required by law</li>
+        <li>Business partners, with your consent, for specific services you request</li>
+      </ul>
+    </CardContent>
+  </Card>
+</section>
 
-              {/* Abbreviated for other sections */}
-              {/* Additional sections would be included here */}
-              
+<Separator />
+
+{/* Your Rights */}
+<section id="rights">
+  <div className="flex items-center gap-2 mb-4">
+    <Shield className="h-5 w-5 text-primary" />
+    <h2 className="text-2xl font-semibold">Your Rights</h2>
+  </div>
+  
+  <Alert className="mb-4 bg-primary/5">
+    <AlertTitle className="text-primary">User Privacy Rights</AlertTitle>
+    <AlertDescription>
+      Depending on your location, you may have rights regarding your personal information.
+    </AlertDescription>
+  </Alert>
+  
+  <Accordion type="single" collapsible className="w-full">
+    <AccordionItem value="right-1">
+      <AccordionTrigger>Access and Portability</AccordionTrigger>
+      <AccordionContent>
+        <p className="text-muted-foreground">
+          You have the right to request a copy of the personal information we hold about you and to receive it in a structured, commonly used format.
+        </p>
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="right-2">
+      <AccordionTrigger>Correction and Deletion</AccordionTrigger>
+      <AccordionContent>
+        <p className="text-muted-foreground">
+          You can request that we correct inaccurate information or delete your personal data in certain circumstances, such as when it's no longer needed for the purposes for which it was collected.
+        </p>
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="right-3">
+      <AccordionTrigger>Objection and Restriction</AccordionTrigger>
+      <AccordionContent>
+        <p className="text-muted-foreground">
+          You have the right to object to the processing of your personal data and to request that we restrict processing in certain circumstances.
+        </p>
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="right-4">
+      <AccordionTrigger>Withdraw Consent</AccordionTrigger>
+      <AccordionContent>
+        <p className="text-muted-foreground">
+          Where we process your data based on consent, you have the right to withdraw that consent at any time.
+        </p>
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+  <p className="text-muted-foreground mt-4">
+    To exercise these rights, please contact us using the information provided at the end of this policy.
+  </p>
+</section>
+
+<Separator />
+
+{/* Cookies and Tracking */}
+<section id="cookies">
+  <div className="flex items-center gap-2 mb-4">
+    <Clock className="h-5 w-5 text-primary" />
+    <h2 className="text-2xl font-semibold">Cookies and Tracking</h2>
+  </div>
+  
+  <Alert className="mb-4 bg-primary/5">
+    <AlertTitle className="text-primary">Cookie Notice</AlertTitle>
+    <AlertDescription>
+      Our website uses cookies to enhance your browsing experience.
+    </AlertDescription>
+  </Alert>
+  
+  <Tabs defaultValue="essential" className="mt-6">
+    <TabsList className="grid w-full grid-cols-3">
+      <TabsTrigger value="essential">Essential</TabsTrigger>
+      <TabsTrigger value="functional">Functional</TabsTrigger>
+      <TabsTrigger value="analytics">Analytics</TabsTrigger>
+    </TabsList>
+    <TabsContent value="essential" className="p-4 border rounded-md mt-2">
+      <h3 className="text-lg font-medium mb-2">Essential Cookies</h3>
+      <p className="text-muted-foreground">
+        These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services.
+      </p>
+    </TabsContent>
+    <TabsContent value="functional" className="p-4 border rounded-md mt-2">
+      <h3 className="text-lg font-medium mb-2">Functional Cookies</h3>
+      <p className="text-muted-foreground">
+        These cookies enable the website to provide enhanced functionality and personalization. They may be set by us or by third party providers whose services we have added to our pages.
+      </p>
+    </TabsContent>
+    <TabsContent value="analytics" className="p-4 border rounded-md mt-2">
+      <h3 className="text-lg font-medium mb-2">Analytics Cookies</h3>
+      <p className="text-muted-foreground">
+        These cookies allow us to count visits and traffic sources so we can measure and improve the performance of our site. They help us to know which pages are the most and least popular.
+      </p>
+    </TabsContent>
+  </Tabs>
+</section>
+
+<Separator />
+
+{/* Children's Privacy */}
+<section id="children">
+  <div className="flex items-center gap-2 mb-4">
+    <Shield className="h-5 w-5 text-primary" />
+    <h2 className="text-2xl font-semibold">Children's Privacy</h2>
+  </div>
+  <Card className="bg-primary/5 border-primary/20">
+    <CardContent className="pt-6">
+      <p className="text-muted-foreground">
+        Our Service is not intended for use by children under the age of 18. We do not knowingly collect 
+        personal information from children. If you are a parent or guardian and you believe your child has 
+        provided us with personal information, please contact us immediately. If we become aware that we 
+        have collected personal data from children without verification of parental consent, we take steps 
+        to remove that information from our servers.
+      </p>
+    </CardContent>
+  </Card>
+</section>
+
+<Separator />
+
+{/* Changes to Policy */}
+<section id="changes">
+  <div className="flex items-center gap-2 mb-4">
+    <Info className="h-5 w-5 text-primary" />
+    <h2 className="text-2xl font-semibold">Changes to Policy</h2>
+  </div>
+  <Accordion type="single" collapsible className="w-full">
+    <AccordionItem value="changes-1">
+      <AccordionTrigger>Policy Updates</AccordionTrigger>
+      <AccordionContent>
+        <p className="text-muted-foreground">
+          We may update our Privacy Policy from time to time. We will notify you of any changes by posting the 
+          new Privacy Policy on this page and updating the "Last Updated" date.
+        </p>
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="changes-2">
+      <AccordionTrigger>Notification of Changes</AccordionTrigger>
+      <AccordionContent>
+        <p className="text-muted-foreground">
+          Significant changes will be communicated to you directly, such as through an email notification. 
+          Changes to this Privacy Policy are effective when they are posted on this page.
+        </p>
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</section>
+
               <section id="contact">
                 <div className="flex items-center gap-2 mb-4">
                   <Clock className="h-5 w-5 text-primary" />

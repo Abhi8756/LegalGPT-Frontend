@@ -135,7 +135,7 @@ export default function PDFComplianceAnalyzer() {
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.entries(complianceData).map(([key, compliance], index) => (
+                  {Object.entries(complianceData).map(([, compliance], index) => (
                     <tr key={index} className="hover:bg-gray-50">
                       <td className="border p-3">
                         <span 

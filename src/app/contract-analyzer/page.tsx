@@ -166,19 +166,17 @@ export default function PDFComplianceAnalyzer() {
             </div>
             
             <div className="flex justify-center">
-              <button 
-                type="submit" 
-                disabled={!file || isLoading}
-                className="flex items-center px-6 py-3 bg-blue-600 text-white rounded-md
-                          hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed 
-                          transition-colors duration-300 font-medium shadow-sm"
+            <button
+                type="submit"
+                className="bg-blue-500 text-white font-bold py-3 px-5 rounded-md hover:bg-blue-600 transition-colors duration-300"
+                disabled={isLoading || !file}
               >
                 {isLoading ? (
                   <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                 ) : (
-                  <FileUp className="mr-2 h-5 w-5" />
+                  null
                 )}
-                {isLoading ? 'Analyzing...' : 'Analyze PDF'}
+                {isLoading ? 'Analyzing...' : 'Analyze Contract'}
               </button>
             </div>
             

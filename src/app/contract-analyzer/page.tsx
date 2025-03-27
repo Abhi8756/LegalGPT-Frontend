@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, FormEvent } from 'react';
-import { FileUp, FileText, XCircle, Loader2 } from 'lucide-react';
+import { FileText, XCircle, Loader2 } from 'lucide-react';
 
 // Define the type for a single compliance check
 interface ComplianceCheck {

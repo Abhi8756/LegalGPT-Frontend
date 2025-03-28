@@ -75,6 +75,9 @@ export default function PDFComplianceAnalyzer() {
       const response = await fetch('/api/proxy/analyze', {
         method: 'POST',
         body: formData,
+        headers: {
+      // Ensure proper logging for debugging
+        },
       });
       //heyy12
       
@@ -87,11 +90,12 @@ export default function PDFComplianceAnalyzer() {
       const data = await response.json();
       setComplianceData(data);
     } catch (err) {
-      console.error('Upload error:', err);
-      if (err instanceof Error && err.name === 'AbortError') {
+      if (err instanceof DOMException && err.name === 'AbortError') {
         setError('Request timed out after 5 minutes');
+      } else if (err instanceof Error) {
+        setError(err.message);
       } else {
-        setError(err instanceof Error ? err.message : 'An unexpected error occurred');
+        setError('An unexpected error occurred');
       }
       setComplianceData(null);
     } finally {

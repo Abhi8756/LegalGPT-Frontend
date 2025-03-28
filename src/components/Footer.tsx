@@ -30,7 +30,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <Link href="/contract-analyzer" className="text-gray-400 hover:text-white transition">
-                  Contract Analyzer
+                Compliance Intelligence
                 </Link>
               </li>
               <li>

@@ -69,9 +69,9 @@ const Navbar = () => {
                     </ListItem>
                     <ListItem
                       href="/contract-analyzer"
-                      title="Analyze Contract"
+                      title="Compliance Intelligence"
                     >
-                      Get detailed analysis of your existing contracts
+                      Make sure your contract is up to date with new rules.
                     </ListItem>
                   </ul>
                 </NavigationMenuContent>

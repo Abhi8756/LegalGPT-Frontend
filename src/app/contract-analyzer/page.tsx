@@ -116,7 +116,7 @@ export default function PDFComplianceAnalyzer() {
   return (
     <div className="container mx-auto p-6 max-w-6xl">
       <h1 className="text-4xl font-bold text-center text-gray-800 dark:text-white mb-10 tracking-tight">
-        LegalGPT Contract Analyzer
+        LegalGPT Compliance Checker
       </h1>
       <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 transition-colors duration-200">
         {/* File Upload Section */}
@@ -200,7 +200,7 @@ export default function PDFComplianceAnalyzer() {
                 {isLoading ? (
                   <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                 ) : null}
-                {isLoading ? "Analyzing..." : "Analyze Contract"}
+                {isLoading ? "Analyzing..." : "Check Compliance"}
               </button>
             </div>
 

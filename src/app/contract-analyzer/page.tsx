@@ -72,19 +72,27 @@ export default function PDFComplianceAnalyzer() {
     const timeoutId = setTimeout(() => controller.abort(), 5 * 60 * 1000);
 
     try {
-      const response = await fetch('/api/proxy/analyze', {
-        method: 'POST',
-        body: formData,
-        headers: {
+      let response: Response | undefined;
+      for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+          response = await fetch('/api/proxy/analyze', {
+            method: 'POST',
+            body: formData,
+            headers: {
+              // Ensure proper logging for debugging
+            },
+          });
+          if (response.ok) break; // Exit loop if successful
+        } catch (err) {
+          if (attempt === 2) throw err; // Rethrow error after final attempt
+        }
+      }
       // Ensure proper logging for debugging
-        },
-      });
-      //heyy12
       
       clearTimeout(timeoutId);
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (!response || !response.ok) {
+        throw new Error(`HTTP error! status: ${response?.status ?? 'unknown'}`);
       }
 
       const data = await response.json();
@@ -177,7 +185,7 @@ export default function PDFComplianceAnalyzer() {
             <div className="flex justify-center">
             <button
                 type="submit"
-                className="bg-blue-500 text-white font-bold py-3 px-5 rounded-md hover:bg-blue-600 transition-colors duration-300"
+                className="bg-blue-500 text-white font-bold flex py-3 px-5 rounded-md hover:bg-blue-600 transition-colors duration-300"
                 disabled={isLoading || !file}
               >
                 {isLoading ? (

@@ -74,7 +74,7 @@ export default function ContractGeneratorForm() {
       <h2 className="text-5xl font-bold text-neutral-800 dark:text-neutral-200">
         Contract Generator
       </h2>
-      <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
+      <p className="mt-2 max-w-lg text-sm text-neutral-600 dark:text-neutral-300">
         Fill the form to generate a legally formatted, Indian-law compliant contract.
       </p>
 

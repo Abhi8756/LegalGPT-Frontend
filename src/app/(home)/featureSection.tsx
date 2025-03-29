@@ -51,7 +51,7 @@ const dummyContent = [
       </>
     ),
     badge: "Feature",
-    image: "/riskdetection.png",
+    image: "/contractgenerator.png",
   },
   {
     title: "Risk Detection",
@@ -85,6 +85,6 @@ const dummyContent = [
       </>
     ),
     badge: "Feature",
-    image: "/riskdetection.png",
+    image: "/compliancechecker.png",
   },
 ];

@@ -39,7 +39,7 @@ const Navbar = () => {
               alt="LegalGPT Logo"
               width={50}
               height={50}
-              className="h-10 w-10 group-hover:scale-105 transition-transform"
+              className="h-10 w-12 group-hover:scale-105 transition-transform"
             />
             <span className="text-xl md:text-2xl font-bold text-primary tracking-tight">
               LegalGPT

@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
   title: "LegalGPT",
@@ -29,6 +30,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>

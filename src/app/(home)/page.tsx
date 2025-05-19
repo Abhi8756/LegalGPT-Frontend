@@ -1,11 +1,15 @@
-import React from 'react'
+import { AboutSection } from "./aboutSection";
+import FeatureRevealSection from "./featureRevealSection";
+import { FeatureSection } from "./featureSection";
+import { HeroSection } from "./herosection";
 
-const HomePage = () => {
+export default function Home() {
   return (
     <div>
-      asdf
+      <HeroSection />
+      <FeatureRevealSection />
+      <FeatureSection />
+      <AboutSection />
     </div>
-  )
+  );
 }
-
-export default HomePage
